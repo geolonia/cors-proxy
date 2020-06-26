@@ -66,16 +66,26 @@ const proxy = async (event, _0, callback) => {
 
   // proxy request
   const url = decodeURIComponent(target);
-  let data, headers;
+  let data;
+  const headers = {};
   try {
     data = await fetch(url, {
       headers: { Origin: Origin || origin },
     }).then((res) => {
-      headers = res.headers.raw();
+      const rawHeaders = res.headers.raw();
+      Object.keys(rawHeaders).forEach((key) => {
+        // Array header value will be error at lambda response
+        headers[key] = rawHeaders[key].join(", ");
+      });
       return res.text();
     });
   } catch (error) {
     console.error(error);
+    return callback(null, {
+      statusCode: error.statusCode,
+      headers: defaultHeaders,
+      body: error.message,
+    });
   }
 
   return callback(null, {

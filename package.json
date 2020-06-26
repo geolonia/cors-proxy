@@ -1,7 +1,7 @@
 {
   "name": "cors-proxy",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/proxy.js",
   "license": "MIT",
   "dependencies": {
     "node-fetch": "^2.6.0"

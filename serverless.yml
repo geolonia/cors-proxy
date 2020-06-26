@@ -12,17 +12,8 @@ provider:
   region: ap-northeast-1
   stage: v1
 
-package:
-  exclude:
-    - .circleci/**
-    - .git/**
-    - bin/**
-    - test/**
-    - docs/**
-    - .*
-    - package-lock.json
-    - yarn.lock
-    - README.md
+exclude:
+  - src/proxy.test.js
 
 functions:
   proxy:
