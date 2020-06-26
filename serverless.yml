@@ -1,0 +1,34 @@
+service: cors-proxy
+
+frameworkVersion: ">=1.73.0 <2.0.0"
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  region: ap-northeast-1
+  stage: v1
+
+package:
+  exclude:
+    - .circleci/**
+    - .git/**
+    - bin/**
+    - test/**
+    - docs/**
+    - .*
+    - package-lock.json
+    - yarn.lock
+    - README.md
+
+functions:
+  proxy:
+    handler: src/proxy.handler
+    events:
+      - http:
+          path: proxy
+          method: GET
+          integration: lambda-proxy

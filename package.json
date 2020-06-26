@@ -1,0 +1,20 @@
+{
+  "name": "cors-proxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
+  "scripts": {
+    "postinstall": "curl https://raw.githubusercontent.com/geolonia/free-referers/master/referers.json > src/referers.json",
+    "start": "sls offline",
+    "deploy": "sls deploy",
+    "test": "mocha src/proxy.test.js"
+  },
+  "devDependencies": {
+    "mocha": "^8.0.1",
+    "serverless": "^1.73.1",
+    "serverless-offline": "^6.4.0"
+  }
+}
