@@ -72,6 +72,10 @@ const proxy = async (event, _0, callback) => {
     }).then((res) => {
       const rawHeaders = res.headers.raw();
       Object.keys(rawHeaders).forEach((key) => {
+        if (key === "content-encoding") {
+          // already deflated
+          return;
+        }
         // Array header value will be error at lambda response
         headers[key] = rawHeaders[key].join(", ");
       });
