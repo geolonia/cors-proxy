@@ -43,12 +43,10 @@ const proxy = async (event, _0, callback) => {
   // check origin
   const isMatched = referers.some((referer) => {
     const reg = new RegExp(
-      `^${(Origin || origin)
-        .replace(".", "\\.")
-        .replace("*", "[a-zA-Z0-9\\-_]+")}`,
+      `^${referer.replace(".", "\\.").replace("*", "[a-zA-Z0-9\\-_]+")}`,
       "ig"
     );
-    if (referer.match(reg)) {
+    if ((Origin || origin).match(reg)) {
       return true;
     } else {
       return false;
