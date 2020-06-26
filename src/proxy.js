@@ -1,14 +1,15 @@
 const axios = require("axios");
+const fetch = require("node-fetch");
 const referers = require("./referers.json");
 
 const defaultHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "access-control-allow-origin": "*",
 };
 
 const proxy = async (event, _0, callback) => {
   // check parameters
   const { target } = event.queryStringParameters || {};
-  const { origin } = event.headers;
+  const { Origin, origin } = event.headers;
 
   if (!target) {
     return callback(null, {
@@ -20,7 +21,7 @@ const proxy = async (event, _0, callback) => {
     });
   }
 
-  if (!origin) {
+  if (!Origin && !origin) {
     return callback(null, {
       statusCode: 400,
       headers: defaultHeaders,
@@ -43,7 +44,9 @@ const proxy = async (event, _0, callback) => {
   // check origin
   const isMatched = referers.some((referer) => {
     const reg = new RegExp(
-      `^${origin.replace(".", "\\.").replace("*", "[a-zA-Z0-9\\-_]+")}`,
+      `^${(Origin || origin)
+        .replace(".", "\\.")
+        .replace("*", "[a-zA-Z0-9\\-_]+")}`,
       "ig"
     );
     if (referer.match(reg)) {
@@ -57,20 +60,25 @@ const proxy = async (event, _0, callback) => {
       statusCode: 403,
       headers: defaultHeaders,
       body: JSON.stringify({
-        message: "Not allowed",
+        message: "Not allowed.",
       }),
     });
   }
 
   // proxy request
+  const url = decodeURIComponent(target);
   let data, headers;
   try {
-    const result = await axios.get(target);
-    data = result.data;
-    headers = result.headers;
+    data = await fetch(url, {
+      headers: { Origin: Origin || origin },
+    }).then((res) => {
+      headers = res.headers.raw();
+      return res.text();
+    });
   } catch (error) {
     console.error(error);
   }
+
   return callback(null, {
     statusCode: 200,
     headers: { ...headers, ...defaultHeaders },

@@ -15,7 +15,7 @@ describe("tests", () => {
     const event = createEvent("https://exmaple.com", "https://geolonia.com");
     const { statusCode, headers } = await proxy(event, {}, callback);
     assert.equal(statusCode, 200);
-    assert.equal(headers["Access-Control-Allow-Origin"], "*");
+    assert.equal(headers["access-control-allow-origin"], "*");
   });
 
   it("should fail without target", async () => {

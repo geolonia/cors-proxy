@@ -4,10 +4,7 @@ Geolonia CORS Proxy.
 
 ## Allowed Origins
 
-- geolonia.com
-- *.geolonia.com
-- iemeshi.jp
-- *.iemeshi.jp
+See [https://github.com/geolonia/free-referers](https://github.com/geolonia/free-referers).
 
 ## Usage
 
