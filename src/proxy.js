@@ -5,7 +5,7 @@ const defaultHeaders = {
   "access-control-allow-origin": "*",
 };
 
-const proxy = async (event, _0, callback) => {
+const proxy = (event, _0, callback) => {
   // check parameters
   const { target } = event.queryStringParameters || {};
   const { Origin, origin } = event.headers;
@@ -64,13 +64,18 @@ const proxy = async (event, _0, callback) => {
 
   // proxy request
   const url = decodeURIComponent(target);
-  let data, contentType;
+
   try {
-    data = await fetch(url, {
+    return fetch(url, {
       headers: { Origin: Origin || origin },
     }).then((res) => {
-      contentType = res.headers.get("content-type");
-      return res.text();
+      return res.text()
+    }).then((text) => {
+      return callback(null, {
+        statusCode: 200,
+        headers: { ...defaultHeaders, "content-type": "text/plain" },
+        body: text,
+      });
     });
   } catch (error) {
     console.error(error);
@@ -80,12 +85,6 @@ const proxy = async (event, _0, callback) => {
       body: JSON.stringify({ message: error.message }),
     });
   }
-
-  return callback(null, {
-    statusCode: 200,
-    headers: { ...defaultHeaders, "content-type": contentType },
-    body: data,
-  });
 };
 
 module.exports.handler = proxy;
