@@ -69,10 +69,12 @@ const proxy = (event, _0, callback) => {
     return fetch(url, {
       headers: { Origin: Origin || origin },
     }).then((res) => {
+      return res.text()
+    }).then((text) => {
       return callback(null, {
         statusCode: 200,
         headers: { ...defaultHeaders, "content-type": "text/plain" },
-        body: res.text(),
+        body: text,
       });
     });
   } catch (error) {
