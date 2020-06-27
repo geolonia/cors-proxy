@@ -70,11 +70,7 @@ const proxy = async (event, _0, callback) => {
       headers: { Origin: Origin || origin },
     }).then((res) => {
       contentType = res.headers.get("content-type");
-      return callback(null, {
-        statusCode: 200,
-        headers: { ...defaultHeaders, "content-type": contentType },
-        body: res.text(),
-      });
+      return res.text();
     });
   } catch (error) {
     console.error(error);
@@ -86,11 +82,9 @@ const proxy = async (event, _0, callback) => {
   }
 
   return callback(null, {
-    statusCode: 500,
-    headers: defaultHeaders,
-    body: JSON.stringify({
-      message: "Something went wrong.",
-    }),
+    statusCode: 200,
+    headers: { ...defaultHeaders, "content-type": contentType },
+    body: data,
   });
 };
 
