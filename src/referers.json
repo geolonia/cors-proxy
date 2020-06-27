@@ -1,0 +1,10 @@
+[
+  "http://127.0.0.1:*",
+  "http://localhost:*",
+  "https://*.github.io",
+  "https://geolonia.com",
+  "https://*.geolonia.com",
+  "https://iemeshi.jp",
+  "https://*.iemeshi.jp",
+  "https://geolonia.ap.ngrok.io"
+]

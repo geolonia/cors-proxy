@@ -7,7 +7,6 @@
     "node-fetch": "^2.6.0"
   },
   "scripts": {
-    "postinstall": "curl https://raw.githubusercontent.com/geolonia/free-referers/master/referers.json > src/referers.json",
     "start": "sls offline",
     "deploy": "sls deploy",
     "test": "mocha src/proxy.test.js"

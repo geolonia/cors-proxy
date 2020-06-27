@@ -65,5 +65,4 @@ typings/
 
 
 .serverless
-src/referers.json
 .DS_Store

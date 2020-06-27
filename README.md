@@ -2,10 +2,6 @@
 
 Geolonia CORS Proxy.
 
-## Allowed Origins
-
-See [https://github.com/geolonia/free-referers](https://github.com/geolonia/free-referers).
-
 ## Usage
 
 ```shell
