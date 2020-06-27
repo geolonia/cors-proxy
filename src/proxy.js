@@ -64,35 +64,26 @@ const proxy = async (event, _0, callback) => {
 
   // proxy request
   const url = decodeURIComponent(target);
-  let data;
-  const headers = {};
+  let data, contentType;
   try {
     data = await fetch(url, {
       headers: { Origin: Origin || origin },
     }).then((res) => {
-      const rawHeaders = res.headers.raw();
-      Object.keys(rawHeaders).forEach((key) => {
-        if (key === "content-encoding") {
-          // already deflated
-          return;
-        }
-        // Array header value will be error at lambda response
-        headers[key] = rawHeaders[key].join(", ");
-      });
+      contentType = res.headers.get("content-type");
       return res.text();
     });
   } catch (error) {
     console.error(error);
     return callback(null, {
-      statusCode: error.statusCode,
-      headers: defaultHeaders,
-      body: error.message,
+      statusCode: error.statusCode || 500,
+      headers: { defaultHeaders, "conetnt-type": "application/json" },
+      body: JSON.stringify({ message: error.message }),
     });
   }
 
   return callback(null, {
     statusCode: 200,
-    headers: { ...headers, ...defaultHeaders },
+    headers: { ...defaultHeaders, "content-type": contentType },
     body: data,
   });
 };
