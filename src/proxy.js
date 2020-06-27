@@ -73,7 +73,7 @@ const proxy = (event, _0, callback) => {
     }).then((text) => {
       return callback(null, {
         statusCode: 200,
-        headers: { ...defaultHeaders, "content-type": "text/plain" },
+        headers: { ...defaultHeaders, "content-type": "text/plain; charset=UTF-8" },
         body: text,
       });
     });
