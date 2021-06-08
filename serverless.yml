@@ -12,6 +12,9 @@ provider:
   memorySize: 128
   region: ap-northeast-1
   stage: v1
+  versionFunctions: false
+  deploymentBucket:
+    name: geolonia-slsdeploymentbucket-${self:provider.region}
 
 package:
   patterns:
