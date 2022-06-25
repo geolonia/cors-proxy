@@ -4,7 +4,7 @@
   "main": "src/proxy.js",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.7"
   },
   "scripts": {
     "start": "sls offline",
