@@ -14,6 +14,6 @@
   "devDependencies": {
     "mocha": "^8.4.0",
     "serverless": "^2.43.1",
-    "serverless-offline": "^7.0.0"
+    "serverless-offline": "^12.0.4"
   }
 }
