@@ -1,4 +1,3 @@
-const fetch = require("node-fetch");
 const referers = require("./referers.json");
 
 const defaultHeaders = {

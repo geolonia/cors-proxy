@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "main": "src/proxy.js",
   "license": "MIT",
-  "dependencies": {
-    "node-fetch": "^2.6.1"
-  },
   "scripts": {
     "start": "sls offline",
     "deploy": "sls deploy",
