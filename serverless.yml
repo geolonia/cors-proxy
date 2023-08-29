@@ -1,14 +1,13 @@
 service: cors-proxy
 
-frameworkVersion: ">=2.43 <3.0.0"
+frameworkVersion: ">=3.34 <4.0.0"
 
 plugins:
   - serverless-offline
 
 provider:
   name: aws
-  runtime: nodejs14.x
-  lambdaHashingVersion: 20201221
+  runtime: nodejs18.x
   memorySize: 128
   region: ap-northeast-1
   stage: v1
