@@ -1,4 +1,4 @@
-const referers = require("./referers.json");
+const referrers = require("./referrers.json");
 
 const defaultHeaders = {
   "access-control-allow-origin": "*",
@@ -29,7 +29,7 @@ const proxy = (event, _0, callback) => {
     });
   }
 
-  if (!Array.isArray(referers)) {
+  if (!Array.isArray(referrers)) {
     return callback(null, {
       statusCode: 500,
       headers: defaultHeaders,
@@ -40,7 +40,7 @@ const proxy = (event, _0, callback) => {
   }
 
   // check origin
-  const isMatched = referers.some((referer) => {
+  const isMatched = referrers.some((referer) => {
     const reg = new RegExp(
       `^${referer.replace(".", "\\.").replace("*", "[a-zA-Z0-9\\-_]+")}`,
       "ig"
@@ -80,7 +80,7 @@ const proxy = (event, _0, callback) => {
     console.error(error);
     return callback(null, {
       statusCode: error.statusCode || 500,
-      headers: { defaultHeaders, "conetnt-type": "application/json" },
+      headers: { defaultHeaders, "content-type": "application/json" },
       body: JSON.stringify({ message: error.message }),
     });
   }
