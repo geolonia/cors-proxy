@@ -80,7 +80,7 @@ const proxy = (event, _0, callback) => {
     console.error(error);
     return callback(null, {
       statusCode: error.statusCode || 500,
-      headers: { defaultHeaders, "content-type": "application/json" },
+      headers: { ...defaultHeaders, "content-type": "application/json" },
       body: JSON.stringify({ message: error.message }),
     });
   }
