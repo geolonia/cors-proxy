@@ -7,7 +7,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs22.x
   memorySize: 128
   region: ap-northeast-1
   stage: v1

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "src/proxy.js",
   "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "start": "sls offline",
     "deploy": "sls deploy",
